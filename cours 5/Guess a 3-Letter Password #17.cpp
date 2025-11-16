@@ -7,7 +7,7 @@ string ReadCapitalLetters()
     return pass;
 }
 
-bool PrintAllLetters(string pass)
+bool GuessPassword(string pass)
 {
     int counter = 0;
     string word = "";
@@ -46,4 +46,5 @@ bool PrintAllLetters(string pass)
 int main()
 {
 
-    PrintAllLetters(ReadCapitalLetters());
+
+    GuessPassword(ReadCapitalLetters());
