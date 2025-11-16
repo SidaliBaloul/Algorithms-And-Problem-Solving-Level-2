@@ -1,0 +1,31 @@
+float ReadNumber()
+{
+    float num;
+    cin >> num;
+
+    return num;
+}
+float MyRound(float num)
+{
+    int remainder = (int)num;
+    float num2;
+    num2 = num - remainder;
+    if (abs(num2) >= 0.5)
+    {
+        if (num > 0)
+            return remainder + 1;
+        else
+            return remainder - 1;
+    }
+    else
+    {
+        return remainder;
+    }
+    
+}
+
+int main()
+{
+    float number = ReadNumber();
+    cout << "c++ round : " << round(number) << endl;
+    cout << "my round : " << MyRound(number);

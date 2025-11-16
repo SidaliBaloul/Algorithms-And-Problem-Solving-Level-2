@@ -1,0 +1,257 @@
+enum enQuestionLevel { easy = 1, medium = 2, hard = 3, mix = 4 };
+enum enOperationType { add = 1, sub = 2, mul = 3, dev = 4, Mix = 5 };
+
+struct stQuesstion
+{
+    int number1 = 0;
+    int number2 = 0;
+    enQuestionLevel QuestionLevel;
+    enOperationType OperationType;
+    int correctanswer = 0;
+    int wronganswer = 0;
+    int PlayerAnswer;
+    bool answerresult = false;
+};
+struct stGameElements
+{
+    stQuesstion QuestionList[100];
+    enQuestionLevel qestionlevel;
+    enOperationType operationtype;
+    short NumberofQuestions;
+    short NumberOfRightAnswers = 0;
+    short NumberOfWrongAnswers = 0;
+    bool isPass = false;
+};
+int RandomNumber(int from, int to)
+{
+    int randnum = rand() % (to - from + 1) + from;
+    return randnum;
+}
+int ReadNumberOfQuestions()
+{
+    int questions;
+    do
+    {
+        cout << "how many Quastions do you want to answer ? ";
+        cin >> questions;
+    } while (questions <= 0);
+
+    return questions;
+}
+enQuestionLevel EnterQuestionLevel()
+{
+    int num;
+    do
+    {
+        cout << "Enter question level [1] Easy, [2] Med, [3] Hard, [4] Mix ? ";
+        cin >> num;
+    } while (num < 1 || num > 5);
+
+    return (enQuestionLevel)num;
+}
+enOperationType EnterOperationType()
+{
+    int num;
+    do
+    {
+        cout << "Enter operation type [1] Add, [2] Sub, [3] Mul, [4] div, [5] Mix ?";
+        cin >> num;
+    } while (num < 1 || num > 5);
+
+    return (enOperationType)num;
+}
+int ReadNumber()
+{
+    int num;
+    cin >> num;
+
+    return num;
+}
+string LevelChoice(stGameElements game)
+{
+    string arr[4] = { "Easy","Medium","Hard","Mix" };
+    return arr[game.qestionlevel - 1];
+}
+string OperationChoice(stGameElements game)
+{
+    string arr[5] = { "Add","Sub","Mul","Dev","Mix"};
+    return arr[game.operationtype - 1];
+}
+int Calculator(int Number1, int Number2, enOperationType Operation)
+{
+    
+    switch (Operation)
+    {
+    case enOperationType::add:
+        return  Number1 + Number2;
+    case enOperationType::sub:
+        return Number1 - Number2;
+    case enOperationType::mul:
+        return Number1 * Number2;
+    case enOperationType::dev:
+        return Number1 / Number2;
+
+    }
+}
+stQuesstion GenerateQuestion(enQuestionLevel QL, enOperationType OP)
+{
+    stQuesstion Question;
+
+    if (QL == enQuestionLevel::mix)
+    {
+        QL = (enQuestionLevel)RandomNumber(1, 3);
+    }
+    if (OP == enOperationType::Mix)
+    {
+        OP = (enOperationType)RandomNumber(1, 4);
+    }
+    Question.OperationType = OP;
+
+    switch (QL)
+    {
+    case enQuestionLevel::easy:
+    {
+        Question.number1 = RandomNumber(1, 10);
+        Question.number2 = RandomNumber(1, 10);
+        Question.correctanswer = Calculator(Question.number1, Question.number2, Question.OperationType);
+        Question.QuestionLevel = QL;
+        return Question;
+    }
+    case enQuestionLevel::medium:
+    {
+        Question.number1 = RandomNumber(10, 50);
+        Question.number2 = RandomNumber(10, 50);
+        Question.correctanswer = Calculator(Question.number1, Question.number2, Question.OperationType);
+        Question.QuestionLevel = QL;
+        return Question;
+    }
+    case enQuestionLevel::hard:
+    {
+        Question.number1 = RandomNumber(50, 100);
+        Question.number2 = RandomNumber(50, 100);
+        Question.correctanswer = Calculator(Question.number1, Question.number2, Question.OperationType);
+        Question.QuestionLevel = QL;
+        return Question;
+    }
+    }
+}
+void GenerateQuizzQuestion(stGameElements &game)
+{
+    for (int i = 0; i <= game.NumberofQuestions; i++)
+    {
+        game.QuestionList[i] = GenerateQuestion(game.qestionlevel, game.operationtype);
+    }
+}
+char OperationChar(enOperationType op)
+{
+    switch (op)
+    {
+    case enOperationType::add:
+        return '+';
+    case enOperationType::sub:
+        return '-';
+    case enOperationType::mul:
+        return '*';
+    case enOperationType::dev:
+        return '/';
+    }
+}
+void ShowGameResults(stGameElements game)
+{
+    cout << "--------------------------------------------\n\n";
+    if (game.isPass)
+    {
+        cout << "Final Results is PASS :) " << endl;
+        system("color 2F");
+    }
+    else
+    {
+        cout << "Final Results is FAIL :( " << endl;
+        system("color 4F");
+    }
+    cout << "\n-------------------------------------------\n\n";
+    cout << "Number of Questions     : " << game.NumberofQuestions << endl;
+    cout << "Questions Level         : " << LevelChoice(game) << endl;
+    cout << "Operation Type          : " << OperationChoice(game) << endl;
+    cout << "Number of right answers : " << game.NumberOfRightAnswers << endl;
+    cout << "Number of wrong answers : " << game.NumberOfWrongAnswers << endl << endl;
+    cout << "------------------------------------------------------\n\n";
+
+    
+}
+void PrintQuestion(stGameElements &game,short questionnum)
+{
+  
+    cout << "\n Question [" << questionnum + 1 << "/" << game.NumberofQuestions << "]" << endl << endl;
+    cout << game.QuestionList[questionnum].number1 << endl;
+    cout << game.QuestionList[questionnum].number2 << " ";
+    cout << OperationChar(game.QuestionList[questionnum].OperationType) << endl;
+    cout << "-------------\n\n";
+        
+}
+void Correct(stGameElements &game,short i)
+{
+    if (game.QuestionList[i].PlayerAnswer != game.QuestionList[i].correctanswer)
+    {
+        game.QuestionList[i].answerresult = false;
+        game.NumberOfWrongAnswers++;
+        cout << "Wrong Answer :( \n";
+        cout << "the right Answer is : " << game.QuestionList[i].correctanswer << endl;
+        system("color 4F");
+        system("\a");
+        
+    }
+    else
+    {
+        game.QuestionList[i].answerresult = true;
+        game.NumberOfRightAnswers++;
+        cout << "Right Answer :) \n";
+        system("color 2F");
+    }
+
+}
+void AskAndCorrect(stGameElements &game)
+{
+    for (int i = 0;i < game.NumberofQuestions;i++)
+    {
+        PrintQuestion(game, i);
+        game.QuestionList[i].PlayerAnswer = ReadNumber();
+
+        Correct(game, i);
+    }
+    game.isPass = (game.NumberOfRightAnswers >= game.NumberOfWrongAnswers);
+}
+void PlayMathGame()
+{
+    stGameElements game;
+    game.NumberofQuestions = ReadNumberOfQuestions();
+    game.qestionlevel = EnterQuestionLevel();
+    game.operationtype = EnterOperationType();
+
+    GenerateQuizzQuestion(game);
+    AskAndCorrect(game);
+    ShowGameResults(game);
+   
+}
+void ClearScreen()
+{
+    system("cls");
+    system("color 0F");
+}
+void PlayGame()
+{
+    char yesno = 'Y';
+    do
+    {
+        ClearScreen();
+        PlayMathGame();
+        cout << "do you want to play again Y/N ? ";
+        cin >> yesno;
+    } while (yesno == 'Y');
+}
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    PlayGame();

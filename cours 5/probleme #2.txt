@@ -1,0 +1,43 @@
+enum enPrime {prime = 1, notprime = 2};
+
+int ReadPositiveNumber(string msg)
+{
+    int num;
+    do
+    {
+        cout << msg << endl;
+        cin >> num;
+    } while (num <= 0);
+
+    return num;
+}
+enPrime CheckPrime(int num)
+{
+    int m = round(num / 2);
+    for (int i = 2; i <= m; i++)
+    {
+        if (num % i == 0)
+            return enPrime::notprime;
+    }
+
+    return enPrime::prime;
+}
+void PrintPrimeNumbers(int num)
+{
+    cout << "print prime numbers from 1 to " << num << endl;
+
+    for (int j = 1; j <= num; j++)
+    {
+        if (CheckPrime(j) == enPrime::prime)
+        {
+            cout << j << endl;
+        }
+
+    }
+}
+
+
+int main()
+{
+    int num = ReadPositiveNumber("enter number value : ");
+    PrintPrimeNumbers(num);

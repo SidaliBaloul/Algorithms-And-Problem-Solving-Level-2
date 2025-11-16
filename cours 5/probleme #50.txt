@@ -1,0 +1,17 @@
+float ReadNumber()
+{
+    float num;
+    cin >> num;
+
+    return num;
+}
+float Mysqrt(float num)
+{
+    return pow(num, 0.5);
+}
+
+int main()
+{
+    float number = ReadNumber();
+    cout << "c++ sqrt : " << sqrt(number) << endl;
+    cout << "my sqrt : " << Mysqrt(number);

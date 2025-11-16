@@ -1,0 +1,36 @@
+int ReadPositiveNumber(string msg)
+{
+    int num;
+    do
+    {
+        cout << msg << endl;
+        cin >> num;
+    } while (num <= 0);
+
+    return num;
+}
+bool CheckPerfectNumber(int num)
+{
+    int m = round(num / 2);
+    int sum = 0;
+
+    for (int i = 1; i <= m; i++)
+    {
+        if (num % i == 0)
+            sum += i;
+    }
+    return num == sum;
+}
+void PrintResult(int num)
+{
+      if (CheckPerfectNumber(num))
+          cout << num << " is perfect " << endl;
+      else
+          cout << num << " is not perfect " << endl;
+}
+
+
+int main()
+{
+    
+    PrintResult(ReadPositiveNumber("enter the number value : "));

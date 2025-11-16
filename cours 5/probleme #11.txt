@@ -1,0 +1,45 @@
+int ReadPositiveNumber(string msg)
+{
+    int num;
+    do
+    {
+        cout << msg << endl;
+        cin >> num;
+    } while (num <= 0);
+
+    return num;
+}
+
+int ReverseNumber(int num)
+{
+    int remainder = 0;
+    int num2 = 0;
+    while (num > 0)
+    {
+        remainder = num % 10;
+        num /= 10;
+        num2 = num2 * 10 + remainder;
+
+    }
+    return num2;
+}
+bool PrintReversed(int num1)
+{
+    return ReverseNumber(num1) == num1;
+}
+
+
+
+int main()
+{
+   
+  
+
+    if (PrintReversed(ReadPositiveNumber("enter the main number : ")))
+    {
+        cout << "yes , it is a palindrom number ! ";
+    }
+    else
+    {
+        cout << "no, it is not ! ";
+    }

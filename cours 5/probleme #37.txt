@@ -1,0 +1,62 @@
+
+int RandomNumber(int from, int to)
+{
+    int randnum = rand() % (to - from + 1) + from;
+    return randnum;
+}
+
+void ReadArrLength(int arr[100], int& arrlength)
+{
+    do
+    {
+        cout << "enter the array length" << endl;
+        cin >> arrlength;
+    } while (arrlength <= 0);
+
+    for (int i = 0; i <= arrlength; i++)
+    {
+        arr[i] = RandomNumber(1, 100);
+    }
+
+}
+void PrintArray(int arr[100], int length)
+{
+
+    for (int i = 0; i < length; i++)
+    {
+        cout << arr[i] << " ";
+    }
+}
+
+void AddArrayElement(int num, int arr[100], int& length)
+{
+    length++;
+    arr[length - 1] = num;
+}
+void Priiint(int arr[100], int arr2[100], int arrlength, int &length)
+{
+    for (int i = 0; i < arrlength; i++)
+    {
+        AddArrayElement(arr[i], arr2, length);
+    }
+}
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    int arr[100], arrlength;
+
+    ReadArrLength(arr, arrlength);
+
+    cout << "Array elements : ";
+    PrintArray(arr, arrlength);
+
+    cout << endl << endl;
+
+    int arr2[100], length = 0;
+    cout << "Array 2 elements : ";
+    Priiint(arr, arr2, arrlength, length);
+    PrintArray(arr2, length);
+
+    cout << endl;

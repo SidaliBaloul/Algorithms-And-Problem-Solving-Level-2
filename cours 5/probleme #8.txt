@@ -1,0 +1,35 @@
+int ReadPositiveNumber(string msg)
+{
+    int num;
+    do
+    {
+        cout << msg << endl;
+        cin >> num;
+    } while (num <= 0);
+
+    return num;
+}
+
+int ReverseNumber(int num1, short num2)
+{
+    int remainder = 0;
+    int degits = 0;
+    while (num1 > 0)
+    {
+        remainder = num1 % 10;
+        num1 /= 10;
+
+        if (remainder == num2)
+            degits++;
+
+        
+    }
+    return degits;
+}
+
+
+int main()
+{
+    int num1 = ReadPositiveNumber("enter the main number : ");
+    short num2 = ReadPositiveNumber("enter the degit value : ");
+    cout << "degit " << num2 << " frequancy is " << ReverseNumber(num1, num2) << " Times " << endl;

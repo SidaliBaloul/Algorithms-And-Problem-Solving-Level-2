@@ -1,0 +1,20 @@
+void PrintAllLetters()
+{
+    for (int m = 65; m <= 90; m++)
+    {
+        for (int i = 65; i <= 90; i++)
+        {
+            for (int j = 65; j <= 90; j++)
+            {
+                cout << char(m) << char(i) << char(j) << endl;
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+    
+}
+
+int main()
+{
+    PrintAllLetters();

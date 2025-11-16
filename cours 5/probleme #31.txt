@@ -1,0 +1,69 @@
+int RandomNumber(int from, int to)
+{
+    int randnum = rand() % (to - from + 1) + from;
+    return randnum;
+}
+void Swap(int &a,int &b)
+{
+    int swap = a;
+    a = b;
+    b = swap;
+
+}
+
+void ReadArrLength(int arr[100], int &arrlength)
+{
+    do
+    {
+        cout << "enter the array length" << endl;
+        cin >> arrlength;
+    } while (arrlength <= 0);
+
+}
+void GetArray(int arr[100], int arrlength)
+{
+    for (int i = 0; i <= arrlength; i++)
+    {
+        arr[i] = i + 1;
+    }
+}
+
+void PrintArray(int arr[100], int length)
+{
+
+    for (int i = 0; i < length; i++)
+    {
+        cout << arr[i] << " ";
+    }
+}
+void GetshuffleArray(int arr[100], int length)
+{
+    for (int i = 0; i < length;i++)
+    {
+        Swap(arr[RandomNumber(1, length - 1)], arr[RandomNumber(1, length - 1)]);
+    }
+
+}
+
+
+int main()
+{
+    srand((unsigned)time(NULL));
+
+    int arr[100], arrlength;
+    int a, b;
+    
+    
+    ReadArrLength(arr, arrlength);
+
+    cout << "Array before shuffle : " << endl;
+    GetArray(arr, arrlength);
+    PrintArray(arr,arrlength);
+
+    cout << endl << endl;
+
+    cout << "Array after shuffle : " << endl;
+    GetshuffleArray(arr, arrlength);
+    PrintArray(arr, arrlength);
+
+    cout << endl << endl;
