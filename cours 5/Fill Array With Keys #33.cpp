@@ -52,4 +52,5 @@ int main()
     srand((unsigned)time(NULL));
 
     short length = 4;
+
     GenerateKeys(ReadPositiveNumber("enter key number : "), arr, length);
