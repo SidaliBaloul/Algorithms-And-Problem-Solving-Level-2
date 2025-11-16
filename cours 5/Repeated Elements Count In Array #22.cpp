@@ -58,4 +58,5 @@ int main()
 
     cout << endl;
 
-    cout << checknum << " the num is repeted : " << Check(arr,arrlength,checknum) << endl;
+    cout << checknum << " the num is repeated : " << Check(arr,arrlength,checknum) << endl;
+
