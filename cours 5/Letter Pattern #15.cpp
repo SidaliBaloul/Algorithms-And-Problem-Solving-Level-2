@@ -10,7 +10,7 @@ int ReadPositiveNumber(string msg)
     return num;
 }
 
-void PatternNumber(int num)
+void PatternLetter(int num)
 {
     for (int i = 65 ; i <= 65 + num - 1; i++)
     {
@@ -25,4 +25,5 @@ void PatternNumber(int num)
 int main()
 {
 
-    PatternNumber(ReadPositiveNumber("enter a number : "));
+    PatternLetter(ReadPositiveNumber("enter a number : "));
+
