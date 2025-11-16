@@ -14,10 +14,10 @@ string Check(int arr[100], int length)
     {
         if (arr[i] != arr[length - 1 - i])
         {
-            return "No,it's not !";
+            return "No,it's not palindrom!";
         }
     }
-    return "Yes , it is !";
+    return "Yes , it is palindrom !";
 }
 void PrintArray(int arr[10], int length)
 {
@@ -39,5 +39,6 @@ int main()
     cout << endl << endl;
 
     cout << Check(arr, length);
+
 
     cout << endl << endl;
